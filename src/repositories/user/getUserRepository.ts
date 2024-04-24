@@ -1,3 +1,4 @@
+import Role from "../../db/models/roles";
 import User from "../../db/models/user"
 
 export const getUserRepository = async () => {
@@ -6,9 +7,11 @@ export const getUserRepository = async () => {
             {
                 order: [
                     ['id', 'ASC']
-             ],
+                ],
          }
         );
+        console.log("ini get user", getUser);
+        
         return getUser;
     } catch (error) {
         

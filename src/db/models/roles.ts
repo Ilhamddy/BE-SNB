@@ -1,10 +1,12 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import connection from "../../config/dbConnect";
+import User from "./user";
 
-interface RoleAttributes {
+interface RoleAttributes
+ {
   id?: number;
   roleName?: string | null;
-  active?: string | null;
+
 
   createdAt: Date;
   updatedAt: Date;
@@ -17,14 +19,17 @@ export interface roleOutput extends Required<RoleAttributes> {}
 class Role extends Model<RoleAttributes, roleInput> implements RoleAttributes {
   public id!: number;
   public roleName!: string;
-  public active!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
 
   // createdAt and updatedAt are automatically managed, so they don't need to be defined here
+  // Define associations
+  public readonly user?: User;
 
   public static associate(models: any) {
-    Role.hasMany(models.User, { foreignKey: 'roleId' });
+    // Role.belongsTo(models.User, {
+    //   foreignKey: 'userId',
+    // });
   }
   
 }
@@ -40,10 +45,6 @@ Role.init(
     roleName: {
       allowNull: true,
       type: DataTypes.STRING,
-    },
-    active: {
-      allowNull: true,
-      type: DataTypes.BOOLEAN,
     },
     // Explicitly define createdAt and updatedAt to satisfy TypeScript
     createdAt: {
@@ -63,5 +64,9 @@ Role.init(
     underscored: false,
   }
 );
+
+// Role.belongsTo(User, {
+//   foreignKey: 'userId',
+// });
 
 export default Role;

@@ -8,19 +8,16 @@ module.exports = {
       [
         {
           roleName: "Super Admin",
-          active: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           roleName: "Admin",
-          active: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },
         {
           roleName: "User",
-          active: true,
           createdAt: new Date(),
           updatedAt: new Date(),
         },

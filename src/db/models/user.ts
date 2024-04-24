@@ -1,6 +1,7 @@
 import { DataTypes, Model, Optional } from "sequelize";
 import connection from "../../config/dbConnect";
 import News from "./news";
+import Role from "./roles";
 
 interface UserAttributes {
   id?: number;
@@ -29,11 +30,16 @@ class User extends Model<UserAttributes, userInput> implements UserAttributes {
   public password!: string;
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
+    // Define associations
+  public readonly roles?: Role[];
 
 
   public static associate(models: any) {
     // User.belongsTo(models.Role, { foreignKey: 'roleId' });
-    User.hasMany(models.News, { foreignKey: 'userId' });
+    // User.hasMany(models.Role, {
+    //   foreignKey: 'userId',
+    //   as: 'roles', // Alias untuk relasi
+    // });
     
   }
   // createdAt and updatedAt are automatically managed, so they don't need to be defined here
@@ -61,10 +67,6 @@ User.init(
       allowNull: true,
       type: DataTypes.INTEGER,
     },
-    // roleId: {
-    //   allowNull: false,
-    //   type: DataTypes.INTEGER,
-    // },
     address: {
       allowNull: true,
       type: DataTypes.STRING,
@@ -72,6 +74,10 @@ User.init(
     password: {
       allowNull: true,
       type: DataTypes.STRING,
+    },
+    roleId: {
+      allowNull: true,
+      type: DataTypes.INTEGER,
     },
     // Explicitly define createdAt and updatedAt to satisfy TypeScript
     createdAt: {
@@ -92,12 +98,14 @@ User.init(
   }
 
   
+  
 );
 
-// User.hasMany(News, { foreignKey: 'userId' });
+// User.hasMany(Role, {
+//   foreignKey: 'userId',
+//   as: 'roles', // Alias untuk relasi
+// });
 
-// User.associate = (models) => {
-//   User.belongsTo(models.role, { foreignKey: 'roleId' });
-// }
+
 
 export default User;

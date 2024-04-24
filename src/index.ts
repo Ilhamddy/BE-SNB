@@ -1,11 +1,13 @@
 import express, { Request, Response, static as static_ } from "express";
 import cors from "cors";
-import router from "./routes/RoleRoute";
+// import router from "./routes/RoleRoute";
 import { NewsRouter } from "./routes/NewsRoute";
 import dotenv from "dotenv";
 import { UserRouter } from "./routes/UserRoute";
 import { ServicesRouter } from "./routes/ServicesRoute";
 import { FaqRouter } from "./routes/FaqsRoute";
+import {RolesRouter} from "./routes/RoleRoute";
+
 
 import { join } from "path";
 
@@ -28,13 +30,16 @@ const newsRouter = new NewsRouter();
 const userRouter = new UserRouter();
 const faqRouter = new FaqRouter();
 const servicesRouter = new ServicesRouter();
+const rolesRouter = new RolesRouter();
 
-app.use(router);
+
 
 app.use("/api/news", newsRouter.getRouter());
 app.use("/api/user", userRouter.getRouter());
 app.use("/api/faq", faqRouter.getRouter());
 app.use("/api/services", servicesRouter.getRouter());
+app.use('/api/roles', rolesRouter.getRouter());
+
 
 app.get("/", (req: Request, res: Response) => {
   return res.send("Request success: Data successfully retrieved from server");

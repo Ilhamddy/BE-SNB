@@ -12,7 +12,9 @@ export interface IUser {
     id: number;
     name: string ;
     email: string ;
-    contact: number ;
+    contact: number;
+    roleId: number ;
+    
     address: string ;
     password: string ;
     createdAt: Date;
