@@ -30,6 +30,7 @@ export class NewsController {
          const createNews = await News.create({
              title: data.title,
              description: data.description,
+             source : data.source,
              image: imageUrl, // Assuming your News model has an 'image' field
              createdAt: new Date(), // Add this line if you need to set the createdAt property
              updatedAt: new Date(), // Add this line if you need to set the updatedAt property

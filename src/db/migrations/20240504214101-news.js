@@ -4,15 +4,11 @@
 module.exports = {
   async up (queryInterface, Sequelize) {[
     queryInterface.addColumn(
-      'User', // table name
-      'roleId', // new field name
+      'News', // table name
+      'source', // new field name
       {
         type: Sequelize.STRING,
         allowNull: true,
-        references: {
-          model: 'Role', // name of Target model
-          key: 'id', // key in Target model that we're referencing
-        },
        
       },
     )
@@ -21,7 +17,8 @@ module.exports = {
 
   async down (queryInterface, Sequelize) {
     return Promise.all([
-      queryInterface.removeColumn('User', 'roleId'),
+      queryInterface.removeColumn('News', 'source'),
+
     ]);
   }
 };

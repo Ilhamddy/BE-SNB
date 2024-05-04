@@ -8,6 +8,7 @@ interface RoleAttributes {
   title?: string | null;
   description?: string | null;
   image?: string | null;
+  source?: string | null;
   userId?: string | null;
   categoryId?: string | null ;
   createdAt: Date;
@@ -23,6 +24,7 @@ class News extends Model<RoleAttributes, roleInput> implements RoleAttributes {
   public title!: string;
   public description!: string;
   public image!: string;
+  public source!: string;
   public userId!: string;
   public categoryId!: string;
 
@@ -56,17 +58,9 @@ News.init(
       allowNull: true,
       type: DataTypes.STRING,
     },
-    categoryId: {
+    source: {
       allowNull: true,
       type: DataTypes.STRING,
-    },
-    userId: {
-      allowNull: true,
-      type: DataTypes.STRING,
-      references: {
-        model: 'User',
-        key: 'id'
-      }
     },
     // Explicitly define createdAt and updatedAt to satisfy TypeScript
     createdAt: {
